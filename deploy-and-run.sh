@@ -20,19 +20,7 @@ else
 fi
 
 # SCP the run.sh file to the remote server
-scp $SSH_OPTIONS -o StrictHostKeyChecking=accept-new run.sh prompts.txt "ubuntu@${IP_ADDRESS}:"
+scp $SSH_OPTIONS -o StrictHostKeyChecking=accept-new run.py run.sh prompts.txt "ubuntu@${IP_ADDRESS}:"
 
 # SSH into the remote server and run run.sh
 ssh $SSH_OPTIONS "ubuntu@${IP_ADDRESS}" "chmod +x run.sh && ./run.sh"
-
-REMOTE_DIR="bark/generated_audio"
-LOCAL_DIR="outputs"
-
-while true; do
-    rsync -az --backup --suffix=.1 --exclude='*.tmp' "ubuntu@${IP_ADDRESS}:${REMOTE_DIR}/" "${LOCAL_DIR}"
-    if [ $? -ne 0 ]; then
-        echo "Error occurred. Exiting the loop."
-        break
-    fi
-    sleep 10
-done
