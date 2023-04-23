@@ -6,8 +6,9 @@ from scipy.io.wavfile import write as write_wav
 
 def read_prompts(file_path):
     with open(file_path, 'r') as f:
-        prompts = f.readlines()
-    return prompts
+        content = f.read()
+    prompts = content.split('---')
+    return [prompt.strip() for prompt in prompts if prompt.strip()]
 
 def process_and_save(prompt, output_dir):
     audio_array = generate_audio(prompt)
