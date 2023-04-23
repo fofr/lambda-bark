@@ -2,6 +2,18 @@
 
 This script assumes you are running on a VM without any persistent filesystem. It’s a cold start that installs everything.
 
+## Prompts
+
+Put your prompts in a `prompts.txt` file, and separate them with `---`:
+
+```
+[laughter] The room filled with [laughter] after the joke was told
+---
+[birds chirping] The morning sun brought with it the sound of [birds chirping]
+---
+[pages turning] He sat in the library, engrossed in a book, the [pages turning] softly
+```
+
 ## Deploy and run
 
 ```sh
