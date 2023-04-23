@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from bark import SAMPLE_RATE, generate_audio, preload_models
 from IPython.display import Audio
 from scipy.io.wavfile import write as write_wav
@@ -10,7 +11,8 @@ def read_prompts(file_path):
 
 def process_and_save(prompt, output_dir):
     audio_array = generate_audio(prompt)
-    file_name = prompt.strip()[:10].replace(' ', '_') + '.wav'
+    now = datetime.now().strftime('%Y%m%d_%H%M%S')
+    file_name = now + '_' + prompt.strip()[:10].replace(' ', '_') + '.wav'
     file_path = os.path.join(output_dir, file_name)
     write_wav(file_path, SAMPLE_RATE, audio_array)
 
