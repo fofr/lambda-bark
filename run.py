@@ -13,9 +13,16 @@ def read_prompts(file_path):
 def process_and_save(prompt, output_dir):
     audio_array = generate_audio(prompt)
     now = datetime.now().strftime('%Y%m%d_%H%M%S')
-    file_name = now + '_' + prompt.strip()[:10].replace(' ', '_') + '.wav'
-    file_path = os.path.join(output_dir, file_name)
-    write_wav(file_path, SAMPLE_RATE, audio_array)
+    prefix = now + '_' + prompt.strip()[:10].replace(' ', '_')
+
+    wav_file_name = prefix + '.wav'
+    wav_file_path = os.path.join(output_dir, wav_file_name)
+    write_wav(wav_file_path, SAMPLE_RATE, audio_array)
+
+    txt_file_name = prefix + '.txt'
+    txt_file_path = os.path.join(output_dir, txt_file_name)
+    with open(txt_file_path, 'w') as f:
+        f.write(prompt)
 
 # download and load all models
 preload_models()
